@@ -2,17 +2,17 @@
 
     include ('API_header.php');
 
-    $id = $_GET['id'];
-    $room_number = $_GET['room_number'];
-    $floor = $_GET['floor'];
-    $beds = $_GET['beds'];
+    $name = $_GET['name'];
+    $brand = $_GET['brand'];
+    $price = $_GET['price'];
+    $expiring_date = $_GET['expiring_date'];
     
+    // 
 
     $query = "
-        INSERT INTO stanze (room_number, floor, beds)
+        INSERT INTO beverage (name, brand, price, expiring_date)
         VALUES 
-            (" . $room_number . ", " . $floor . ", " . $beds . ")
-        ";
+            ('" . $name . "', '" . $brand . "', " . $price . ", '" . $expiring_date . "')";
 
     // Console.logga la query prima di effettivamente inviarla
     // echo json_encode(["query" => $query]);
@@ -27,3 +27,4 @@
     echo json_encode($res);
 
  ?>
+

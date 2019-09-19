@@ -2,23 +2,29 @@
 $(document).ready(function() {
 	//carica tutte le bevande
 	getBeverage();
-    // $(document).on("click",".add_room",addRoom);
+
+    $(document).on("click",".add_beverage",addBeverage);
     // $(document).on("click",".update_room",updateRoom);
     // $(document).on("click",".delete_room",deleteRoom);
 });
 
 
 // # # CREATE # # 
-function addRoom() {
+function addBeverage() {
 
 	$.ajax({
 		url: "API_create.php",
 		method: "GET",
 		data: getBeverageParams(),
 		success: function(data) {
-			console.log("Risultato aggiunta stanza:",data);
+			console.log("Risultato aggiunta bevanda:",data);
 			//carica tutte le stanze
 			getBeverage();
+		},
+		error: function(error,status,other) {
+			console.log('errore API', error);
+			console.log(status);
+			console.log(other);
 		}
 	});
 }
@@ -29,7 +35,6 @@ function getBeverage() {
 		url: "API_read.php",
 		method: "GET",
 		success: function(data) {
-			console.log(data);
 			printBeverage(data);
 		},
 		error: function(error, status, other) {
@@ -73,7 +78,7 @@ function printBeverage(data) {
 	// init handlebars
 	var source   = document.getElementById("item-template").innerHTML;
 	var template = Handlebars.compile(source);
-	
+
 	var destinazione = $(".beverage-container");
 
 	$(".beverage").remove();
@@ -90,17 +95,17 @@ function printBeverage(data) {
 
 
 function getBeverageParams(id) {
-	var room_number = prompt("Numero stanza:");
-	var floor = prompt("Piano:");
-	var beds = prompt("N° letti:");
+	var name = prompt("Nome bevanda:");
+	var brand = prompt("Marca bevanda:");
+	var price = Number(prompt("Prezzo:"));
+	var expiring_date = prompt("Data di scadenza:");
 
 	var result = {
-		room_number: room_number,
-		floor: floor,
-		beds: beds,
-		id: id
+		name: name,
+		brand: brand,
+		price: price,
+		expiring_date: expiring_date
 	}
-	console.log(result);
 	return result;
 }
 
