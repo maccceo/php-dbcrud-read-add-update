@@ -1,11 +1,10 @@
 
 $(document).ready(function() {
-	//carica tutte le stanze
-	getRoom();
-
-    $(document).on("click",".add_room",addRoom);
-    $(document).on("click",".update_room",updateRoom);
-    $(document).on("click",".delete_room",deleteRoom);
+	//carica tutte le bevande
+	getBeverage();
+    // $(document).on("click",".add_room",addRoom);
+    // $(document).on("click",".update_room",updateRoom);
+    // $(document).on("click",".delete_room",deleteRoom);
 });
 
 
@@ -15,22 +14,28 @@ function addRoom() {
 	$.ajax({
 		url: "API_create.php",
 		method: "GET",
-		data: getRoomParams(),
+		data: getBeverageParams(),
 		success: function(data) {
 			console.log("Risultato aggiunta stanza:",data);
 			//carica tutte le stanze
-			getRoom();
+			getBeverage();
 		}
 	});
 }
 
 // # # READ # # 
-function getRoom() {
+function getBeverage() {
 	$.ajax({
 		url: "API_read.php",
 		method: "GET",
 		success: function(data) {
-			printRoom(data);
+			console.log(data);
+			printBeverage(data);
+		},
+		error: function(error, status, other) {
+			console.log('errore API', error);
+			console.log(status);
+			console.log(other);
 		}
 	});
 }
@@ -41,11 +46,11 @@ function updateRoom() {
 	$.ajax({
 		url: "API_update.php",
 		method: "GET",
-		data: getRoomParams( getID($(this)) ),
+		data: getBeverageParams( getID($(this)) ),
 		success: function(data) {
 			console.log("Risultato aggiornamento stanza:",data);
 			//carica tutte le stanze
-			getRoom();
+			getBeverage();
 		}
 	});
 }
@@ -59,32 +64,32 @@ function deleteRoom() {
 		success: function(data) {
 			console.log("stanza eliminata:",data);
 			//carica tutte le stanze
-			getRoom();
+			getBeverage();
 		}
 	});
 }
 
-function printRoom(data) {
-	var destinazione = $(".stanze");
+function printBeverage(data) {
+	// init handlebars
+	var source   = document.getElementById("item-template").innerHTML;
+	var template = Handlebars.compile(source);
+	
+	var destinazione = $(".beverage-container");
 
-	$("li").remove();
+	$(".beverage").remove();
 
 	for (var i = 0; i < data.length; i++) {
-		var stanza = data[i];
-		var stampa =
-			"<li data-id='" + stanza.id + "'>" +
-				"<p>Numero stanza: " + stanza.room_number + "</p>" +
-				"<p>Piano: " + stanza.floor + "</p>" +
-				"<p>Letti: " + stanza.beds + "</p>" +
-			"<button class='delete_room'>Elimina stanza</button>" +
-			"<button class='update_room'>Modifica stanza</button></li>";
-		//aggiungo album all'HTML
-		destinazione.append(stampa);
+		var beverage = data[i];
+
+		// compilo template coi dati passati
+		var html = template(beverage);
+		// li aggiungo alla pagina
+		destinazione.append(html);
 	}
 }
 
 
-function getRoomParams(id) {
+function getBeverageParams(id) {
 	var room_number = prompt("Numero stanza:");
 	var floor = prompt("Piano:");
 	var beds = prompt("N° letti:");

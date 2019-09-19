@@ -5,7 +5,7 @@
     $servername = 'localhost';
     $username = 'matteo';
     $password = 'bool';
-    $dbname = 'esercitazioni';
+    $dbname = 'beverageDB';
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
