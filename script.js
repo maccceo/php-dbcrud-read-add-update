@@ -98,8 +98,8 @@ function printBeverage(data) {
 function getBeverageParams(id) {
 	var name = prompt("Nome bevanda:");
 	var brand = prompt("Marca bevanda:");
-	var price = Number(prompt("Prezzo:"));
-	var expiring_date = prompt("Data di scadenza:");
+	var price = Number(prompt("Prezzo (utilizzare il punto per i centesimi):"));
+	var expiring_date = prompt("Data di scadenza [YYYY-MM-DD]:");
 
 	var result = {
 		id: id,
