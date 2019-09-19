@@ -5,7 +5,7 @@
     $id = $_GET['id'];
 
     $query = "
-        DELETE FROM stanze
+        DELETE FROM beverage
         WHERE id = " . $id . "
     ";
 

@@ -5,7 +5,7 @@ $(document).ready(function() {
 
     $(document).on("click",".add_beverage",addBeverage);
     $(document).on("click",".update_beverage",updateBeverage);
-    // $(document).on("click",".delete_room",deleteRoom);
+    $(document).on("click",".delete_beverage",deleteBeverage);
 });
 
 
@@ -51,7 +51,7 @@ function updateBeverage() {
 		method: "GET",
 		data: getBeverageParams( getID($(this)) ),
 		success: function(data) {
-			console.log("Risultato aggiornamento stanza:",data);
+			console.log("Risultato aggiornamento prodotto:",data);
 			//carica tutte le stanze
 			getBeverage();
 		}
@@ -59,17 +59,20 @@ function updateBeverage() {
 }
 
 // # # DELETE # # 
-function deleteRoom() {
-	$.ajax({
-		url: "API_delete.php",
-		method: "GET",
-		data: {id: getID($(this))},
-		success: function(data) {
-			console.log("stanza eliminata:",data);
-			//carica tutte le stanze
-			getBeverage();
-		}
-	});
+function deleteBeverage() {
+	var check = prompt("Sicuro? Scrivi 'si'").toLowerCase();
+	if (check == "si") {
+		$.ajax({
+			url: "API_delete.php",
+			method: "GET",
+			data: {id: getID($(this))},
+			success: function(data) {
+				console.log("prodotto eliminato:",data);
+				//carica tutte le stanze
+				getBeverage();
+			}
+		});
+	}
 }
 
 function printBeverage(data) {
