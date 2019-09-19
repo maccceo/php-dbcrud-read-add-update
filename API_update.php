@@ -3,14 +3,15 @@
     include ('API_header.php');
 
     $id = $_GET['id'];
-    $room_number = $_GET['room_number'];
-    $floor = $_GET['floor'];
-    $beds = $_GET['beds'];
+    $name = $_GET['name'];
+    $brand = $_GET['brand'];
+    $price = $_GET['price'];
+    $expiring_date = $_GET['expiring_date'];
     
 
     $query = "
-        UPDATE stanze
-        SET room_number = ".$room_number.", floor = ".$floor.", beds = ".$beds."
+        UPDATE beverage
+        SET name = '".$name."', brand = '".$brand."', price = ".$price.", expiring_date = '".$expiring_date."'
         WHERE id = " . $id;
 
     // Console.logga la query prima di effettivamente inviarla

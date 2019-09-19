@@ -4,14 +4,13 @@ $(document).ready(function() {
 	getBeverage();
 
     $(document).on("click",".add_beverage",addBeverage);
-    // $(document).on("click",".update_room",updateRoom);
+    $(document).on("click",".update_beverage",updateBeverage);
     // $(document).on("click",".delete_room",deleteRoom);
 });
 
 
 // # # CREATE # # 
 function addBeverage() {
-
 	$.ajax({
 		url: "API_create.php",
 		method: "GET",
@@ -46,8 +45,7 @@ function getBeverage() {
 }
 
 // # # UPDATE # # 
-function updateRoom() {
-
+function updateBeverage() {
 	$.ajax({
 		url: "API_update.php",
 		method: "GET",
@@ -101,6 +99,7 @@ function getBeverageParams(id) {
 	var expiring_date = prompt("Data di scadenza:");
 
 	var result = {
+		id: id,
 		name: name,
 		brand: brand,
 		price: price,

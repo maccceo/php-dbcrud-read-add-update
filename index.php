@@ -16,6 +16,8 @@
         <span>by {{brand}}</span>
         <p>Prezzo: {{price}}€</p>
         <p>Data di scadenza: {{expiring_date}}</p>
+        <button class="update_beverage">Modifica dati</button>
+        <button class="delete_beverage">Elimina prodotto</button>
       </div>
     </script>
   </head>
